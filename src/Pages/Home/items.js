@@ -1,13 +1,14 @@
 import React from "react";
+import "./items.css";
 
 const Items = (props) => {
   //   console.log(props);
-  const { id, title, thumbnailUrl } = props?.single;
+  const { _id, title, url } = props?.single;
 
   return (
-    <div>
-      <p>{id}</p>
-      <img src={thumbnailUrl} alt="" />
+    <div className="items">
+      <p>ID : {_id}</p>
+      <img style={{ width: "150px" }} src={url} alt="" />
       <p>{title}</p>
     </div>
   );
