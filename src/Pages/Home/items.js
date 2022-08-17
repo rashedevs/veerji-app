@@ -1,7 +1,8 @@
 import React from "react";
 
-const Item = (props) => {
-  const { id, title, thumbnailUrl } = props?.single?.item;
+const Items = (props) => {
+  //   console.log(props);
+  const { id, title, thumbnailUrl } = props?.single;
 
   return (
     <div>
@@ -12,4 +13,4 @@ const Item = (props) => {
   );
 };
 
-export default Item;
+export default Items;

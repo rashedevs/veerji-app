@@ -3,3 +3,8 @@
     grid-template-columns: repeat(4,1fr);
    align-content: center;
 }
+.input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

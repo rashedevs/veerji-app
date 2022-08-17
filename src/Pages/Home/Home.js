@@ -1,22 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Fuse from "fuse.js";
 import Item from "./Item";
 import "./Home.css";
+import allData from "./data.json";
+import Items from "./items";
 const Home = () => {
-  const [allData, setData] = useState();
-  //   const url = info;
-  useEffect(() => {
-    fetch("data.json")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+  const [searchText, setSearchText] = useState("");
+  const newdata = allData?.slice(0, 10);
+  const options = {
+    includeScore: true,
+    // Search in `title`
+    keys: ["title"],
+  };
+
+  const fuse = new Fuse(allData, options);
+  const result = fuse.search(searchText);
+  //   console.log(result);
   return (
     <div>
-      <h2>This is fuzzy search page</h2>
-      <div>Total data : {allData?.length}</div>
-      <div class="products">
-        {allData?.map((single) => (
-          <Item key={single.id} single={single}></Item>
-        ))}
+      <h2>Welcome to Veerji</h2>
+      <div className="input">
+        <input
+          style={{ padding: "8px 100px 8px 30px" }}
+          type="text"
+          placeholder="Search your Item"
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
+      </div>
+      <div className="products">
+        {(searchText === "" &&
+          newdata?.map((single) => (
+            <Items key={single?.id} single={single}></Items>
+          ))) ||
+          result?.map((single) => (
+            <Item key={single?.item.id} single={single}></Item>
+          ))}
       </div>
     </div>
   );
